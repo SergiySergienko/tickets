@@ -1,0 +1,2 @@
+class ModelError < StandardError
+end

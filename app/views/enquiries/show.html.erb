@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>Reference id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Subject</th>
+    <th>Message</th>
+  </tr>
+  <tr>
+    <td><%= @enquiry.ref_id %></td>
+    <td><%= @enquiry.name %></td>
+    <td><%= @enquiry.email %></td>
+    <td><%= @enquiry.subject %></td>
+    <td><%= @enquiry.message %></td>
+  </tr>
+</table>
+
+<%= render 'comments/form', enquiry: @enquiry %>
+
+<%= link_to 'Back', enquiries_path %>

@@ -1,0 +1,22 @@
+<%= form_with(scope: :enquiry, url: enquiries_path, local: true) do |form| %>
+  <% if enquiry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enquiry.errors.count, "error") %> prohibited this enquiry from being saved:</h2>
+
+      <ul>
+      <% enquiry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.text_field :name %>
+    <%= form.text_field :subject %>
+    <%= form.text_field :department %>
+    <%= form.text_field :email %>
+    <%= form.text_field :message %>
+    <%= form.submit %>
+  </div>
+<% end %>
