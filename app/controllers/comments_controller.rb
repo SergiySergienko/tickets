@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
 
   # POST /comments.json
   def create
-    # @comment = @manager.create(comment_params)
     @comment = CreateCommentService.new(@manager).process(comment_params)
     respond_to do |format|
       if @comment.errors.empty?
