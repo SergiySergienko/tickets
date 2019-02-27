@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
 
   # POST /comments.json
   def create
-    @comment = @manager.create(comment_params)
+    # @comment = @manager.create(comment_params)
+    @comment = CreateCommentService.new(@manager).process(comment_params)
     respond_to do |format|
       if @comment.errors.empty?
         format.json { render :show, status: :created, comment: @comment }
@@ -16,7 +17,7 @@ class CommentsController < ApplicationController
   private
 
     def set_manager
-      @manager ||= @manager = Repository::AR::Comment
+      @manager = Repository::AR::Comment
     end
 
     def comment_params

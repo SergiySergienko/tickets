@@ -19,7 +19,7 @@ class EnquiriesController < ApplicationController
 
   # POST /enquiries
   def create
-    @enquiry = @manager.create(enquiry_params)
+    @enquiry = CreateEnquiryService.new(RefIdService, @manager).process(enquiry_params)
     unless @enquiry.errors.empty?
       render :new 
     else 

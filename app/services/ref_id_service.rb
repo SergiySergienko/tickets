@@ -1,3 +1,6 @@
+#
+# Reference ID generator
+#
 class RefIdService
   #
   # Generates entity ID

@@ -4,31 +4,12 @@
 #
 module Repository
   module AR
-    class Enquiry
-      include Repository::RepositoryInterface
-      
-      class << self
-        delegate :generate_id, to: :RefIdService
-        
-        def find_by(*args)
-          AR::Models::Enquiry.find_by(*args)
-        end
+    class Enquiry < Base
 
-        def create(entity_attrs)
-          entity_attrs.merge!({ ref_id: generate_id })
-          enquiry = prepare_new(entity_attrs)
-          enquiry.save if enquiry.valid?
-          enquiry
-        end
+      protected
 
-        def prepare_new(*args)
-          AR::Models::Enquiry.new(*args)
-        end
-
-        def all
-          AR::Models::Enquiry.all
-        end
-
+      def self.current_model
+        AR::Models::Enquiry
       end
       
     end

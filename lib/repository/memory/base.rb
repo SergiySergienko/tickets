@@ -12,10 +12,8 @@ module Repository
           filter_by(*args).try(:firsts)
         end
 
-        def create(entity_attrs)
-          entity = prepare_new(entity_attrs)
-          Storages::MemoryStorage.instance.add_to_storage(entity) if entity.valid?
-          entity
+        def create(entity)
+          Storages::MemoryStorage.instance.add_to_storage(entity)
         end
 
         def all
@@ -37,7 +35,7 @@ module Repository
         end
 
         def current_model
-          raise "'current_model' method should be implemented"
+          raise "method 'self.current_model' should be implemented in #{name} class"
         end
       end
     end

@@ -1,3 +1,9 @@
+#
+# Repository interface
+# to implement your custom ORM or integrates
+# with existing one, please use this interface, and
+# reload methods that you are using
+#
 module Repository
   module RepositoryInterface
 

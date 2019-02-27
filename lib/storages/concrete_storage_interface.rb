@@ -1,12 +1,17 @@
+#
+# Storage interface module
+# To implement your custom storage or 
+# integrates with existing one, please use this interface
+#
 module Storages
   module ConcreteStorageInterface
 
     def add_to_storage(entitiy)
-      raise "create method should be implemented"
+      raise "add_to_storage method should be implemented"
     end
 
     def get_collection
-      raise "get_all method should be implemented"
+      raise "get_collection method should be implemented"
     end
 
     def find_by(*args)
