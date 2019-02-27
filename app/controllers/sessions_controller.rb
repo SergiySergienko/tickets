@@ -35,6 +35,16 @@ class SessionsController < ApplicationController
 
   private
 
+  #
+  # Prepare repository for current controller actions
+  # example:
+  # @manager = Repository::AR::User - to work with User repository
+  # with ActiveRecord implementation
+  # @manager = Repository::Memory::User - to work with User repository
+  # with Memory Storage implementation
+  #
+  # @return manager
+  #
   def set_manager
     @manager ||= Repository::AR::User
   end

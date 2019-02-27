@@ -11,7 +11,7 @@ module Repository
         delegate :generate_id, to: :RefIdService
         
         def find_by(*args)
-          Repository::AR::Models::Enquiry.find_by(*args)
+          AR::Models::Enquiry.find_by(*args)
         end
 
         def create(entity_attrs)
@@ -22,11 +22,11 @@ module Repository
         end
 
         def prepare_new(*args)
-          Repository::AR::Models::Enquiry.new(*args)
+          AR::Models::Enquiry.new(*args)
         end
 
         def all
-          Repository::AR::Models::Enquiry.all
+          AR::Models::Enquiry.all
         end
 
       end

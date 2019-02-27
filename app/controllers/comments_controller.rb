@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   private
 
     def set_manager
-      @manager ||= @manager = Repository::Memory::Comment
+      @manager ||= @manager = Repository::AR::Comment
     end
 
     def comment_params

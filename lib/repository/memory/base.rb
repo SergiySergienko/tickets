@@ -1,6 +1,6 @@
 #
 # Memory Repository Base class
-# this class know how to work with MemoryStorage interface
+# this class know how to work with MemoryStorage service
 #
 module Repository
   module Memory

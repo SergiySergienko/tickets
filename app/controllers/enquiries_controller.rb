@@ -9,7 +9,7 @@ class EnquiriesController < ApplicationController
   # GET /enquiries/1
   def show
     @enquiry = @manager.find_by(ref_id: params[:id])
-    @comments = Repository::Memory::Comment.all_by_enquiry_id(@enquiry.id.to_s)
+    @comments = Repository::AR::Comment.all_by_enquiry_id(@enquiry.id.to_s)
   end
 
   # GET /enquiries/new
