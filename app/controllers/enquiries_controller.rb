@@ -2,17 +2,14 @@ class EnquiriesController < ApplicationController
   before_action :set_manager
 
   # GET /enquiries
-  # GET /enquiries.json
   def index
-    # @enquiries = @manager.all
     @enquiries = @manager.all
   end
 
   # GET /enquiries/1
-  # GET /enquiries/1.json
   def show
     @enquiry = @manager.find_by(ref_id: params[:id])
-    @comment = Storages::Memory::Repositories::Comment.prepare_new(enquiry: enquiry)
+    @comments = Repository::Memory::Comment.all_by_enquiry_id(@enquiry.id.to_s)
   end
 
   # GET /enquiries/new
@@ -33,7 +30,7 @@ class EnquiriesController < ApplicationController
   private
 
   def set_manager
-    @manager = Storages::Memory::Repositories::Enquiry
+    @manager = Repository::AR::Enquiry
   end
 
   def enquiry_params

@@ -1,4 +1,7 @@
-module Storages::ActiveRecord::Models
+#
+# ActiveRecord User model
+#
+module Repository::AR::Models
   class User < ApplicationRecord
     self.table_name = "users"
     

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 	root 'enquiries#index'
 	resources :enquiries, only: [:new, :create, :show, :index]
+	resources :comments, only: [:create]
   
 	get '/login'     => 'sessions#new'
 	get '/add_test'  => 'sessions#add_test_user'

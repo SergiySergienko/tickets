@@ -1,4 +1,4 @@
-module Storages
+module Repository
   module RepositoryInterface
 
     def self.included base

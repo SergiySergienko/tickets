@@ -15,6 +15,7 @@
   </tr>
 </table>
 
+<%= render 'comments/replies', comments: @comments %>
 <%= render 'comments/form', enquiry: @enquiry %>
 
 <%= link_to 'Back', enquiries_path %>

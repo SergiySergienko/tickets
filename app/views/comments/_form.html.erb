@@ -1,3 +1,8 @@
-<%= form_with(scope: :comment, url: enquiries_path, local: true) do |form| %>
-<%= form.text_field :message %>
+<div id="error_explanation">
+</div>
+
+<%= form_with(scope: :comment, url: comments_path) do |form| %>
+  <%= form.hidden_field :enquiry_id, value: @enquiry.id %>
+  Reply: <%= form.text_field :message %>
+  <%= form.submit %>
 <% end %>

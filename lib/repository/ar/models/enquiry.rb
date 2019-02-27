@@ -1,4 +1,7 @@
-module Storages::ActiveRecord::Models
+#
+# ActiveRecord Enquiry model
+#
+module Repository::AR::Models
   class Enquiry < ApplicationRecord
     self.table_name = "enquiries"
 

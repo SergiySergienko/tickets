@@ -1,2 +1,0 @@
-class ModelError < StandardError
-end
