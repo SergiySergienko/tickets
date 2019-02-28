@@ -3,8 +3,8 @@
 # expecting reference ID generator and repository
 # as parameters
 #
-class CreateEnquiryService < BaseProcessor
-  attr_reader :current_ref_id_service
+class CreateEnquiryService
+  attr_reader :current_ref_id_service, :current_repository
   
   #
   # Constructor
@@ -14,25 +14,16 @@ class CreateEnquiryService < BaseProcessor
   #
   def initialize(ref_id_service, repository)
     @current_ref_id_service = ref_id_service
-    super(repository)
+    @current_repository = repository
   end
 
-  protected
-
-  def get_mailer
-    EnquiryMailer
-  end
-  
-  def get_chain
-    Processor::Task::Enquiry::AssignRefId.new(
-      Processor::Task::ConvertToInstance.new(
-        Processor::Task::Validate.new(
-          Processor::Task::PushToStore.new(
-            Processor::Task::Enquiry::SendEmail.new(nil, get_mailer), 
-            current_repository)
-          ), 
-        current_repository), 
-      current_ref_id_service)
+  def process(entity_attrs)
+    entity_attrs.merge!({ ref_id: current_ref_id_service.generate_id })
+    entity = current_repository.prepare_new(entity_attrs)
+    return entity unless entity.valid?
+    entity = current_repository.create(entity)
+    EnquiryMailer.new_enquiry_confirmation(entity).deliver
+    entity
   end
 
 end

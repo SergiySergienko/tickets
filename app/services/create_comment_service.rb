@@ -3,22 +3,27 @@
 # expecting repository
 # as parameters
 #
-class CreateCommentService < BaseProcessor
-  
-  protected
+class CreateCommentService
 
-  def get_mailer
-    CommentMailer
-  end
-  
-  def get_chain
-    Processor::Task::ConvertToInstance.new(
-      Processor::Task::Validate.new(
-        Processor::Task::PushToStore.new(
-          Processor::Task::Comment::SendEmail.new(nil, get_mailer), 
-          current_repository)
-        ), 
-      current_repository)
+  attr_reader :current_repository, :enquiry_repository
+  #
+  # Constructor
+  #
+  # @param repository
+  #
+  def initialize(repository, enquiry_repository)
+    @current_repository = repository
+    @enquiry_repository = enquiry_repository
   end
 
+
+  def process(entity_attrs)
+    enquiry = enquiry_repository.find_by(id: entity_attrs[:enquiry_id].to_i)
+    comment = current_repository.prepare_new(entity_attrs)
+    return comment unless comment.valid?
+    comment = current_repository.create(comment)
+    CommentMailer.new_comment(comment, enquiry).deliver
+    comment
+  end  
+  
 end

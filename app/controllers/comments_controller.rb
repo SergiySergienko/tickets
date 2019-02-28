@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   # POST /comments.json
   def create
-    @comment = CreateCommentService.new(@manager).process(comment_params)
+    @comment = CreateCommentService.new(@manager, Repository::AR::Enquiry).process(comment_params)
     respond_to do |format|
       if @comment.errors.empty?
         format.json { render :show, status: :created, comment: @comment }

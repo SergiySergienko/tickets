@@ -9,10 +9,11 @@ module Repository
 
       class << self
         def find_by(*args)
-          filter_by(*args).try(:firsts)
+          filter_by(*args).try(:first)
         end
 
         def create(entity)
+          entity.id ||= (get_max_id + 1)
           Storages::MemoryStorage.instance.add_to_storage(entity)
         end
 
@@ -32,6 +33,11 @@ module Repository
             conditions.map { |key, value| (entity.respond_to?(key) && (entity.send(key) == value)) }.all?(true)
           end  
           filtered_collection
+        end
+
+        def get_max_id
+          last_id = all.last.try(:id) if all.length > 0
+          last_id || 0
         end
 
         def current_model
